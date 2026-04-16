@@ -40,6 +40,12 @@ To serve this app on `ben.poersch.online`, use this setup:
 3. **App URL environment variable**
    - In Railway variables, set:
      - `NEXT_PUBLIC_SITE_URL=https://ben.poersch.online`
+   - `NEXT_PUBLIC_SITE_URL` must be a full absolute URL including the scheme (`https://`).
+   - Do **not** leave it empty and do **not** use only a bare domain like `ben.poersch.online`, because the app parses this value with `new URL(...)`.
+   - Use only the site origin (no path), for example:
+     - ✅ `https://ben.poersch.online`
+     - ❌ `ben.poersch.online`
+     - ❌ `https://ben.poersch.online/some/path`
    - Redeploy the service.
 
 4. **Verify**
