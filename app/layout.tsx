@@ -15,6 +15,10 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: 'Benjamin Poersch | AI Expert & Product Builder',
   description: 'AI Expert, Integration Specialist, and Applied AI Builder based in Berlin.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ben.poersch.online'),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
