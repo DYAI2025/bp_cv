@@ -12,10 +12,23 @@ const outfit = Outfit({
   variable: '--font-sans',
 });
 
+const DEFAULT_SITE_URL = 'https://ben.poersch.online';
+
+function getMetadataBase(): URL {
+  const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const siteUrl = configuredSiteUrl || DEFAULT_SITE_URL;
+
+  try {
+    return new URL(siteUrl);
+  } catch {
+    return new URL(DEFAULT_SITE_URL);
+  }
+}
+
 export const metadata: Metadata = {
   title: 'Benjamin Poersch | AI Expert & Product Builder',
   description: 'AI Expert, Integration Specialist, and Applied AI Builder based in Berlin.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ben.poersch.online'),
+  metadataBase: getMetadataBase(),
   alternates: {
     canonical: '/',
   },
