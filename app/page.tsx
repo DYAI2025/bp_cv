@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { MapPin, Mail, Github, Linkedin, ExternalLink, Terminal, Code2, Workflow, GitBranch, Cpu, LineChart, Layers, Zap, Server, Database, X, Edit2, Check, Copy, Mic } from 'lucide-react';
+import { MapPin, Mail, Github, Linkedin, ExternalLink, Terminal, Code2, Workflow, GitBranch, Cpu, LineChart, Layers, Zap, Server, Database, X, Edit2, Check, Copy, Mic, FileDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
@@ -1023,7 +1023,7 @@ export default function Portfolio() {
         >
           <h2 className="text-4xl md:text-5xl font-serif font-light text-blue-50">Lass uns die Zukunft bauen.</h2>
           <p className="text-blue-200/60 max-w-xl mx-auto font-light text-lg">
-            Ready to translate emerging AI capabilities into real products and workflows? Let's connect.
+            Ready to translate emerging AI capabilities into real products and workflows? Let&apos;s connect.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
@@ -1047,6 +1047,14 @@ export default function Portfolio() {
             <a href="https://linkedin.com/in/benjamin-poersch" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-transparent text-blue-50 font-light hover:bg-white/5 border border-white/20 transition-colors">
               <Linkedin className="w-5 h-5 mr-3" />
               Connect on LinkedIn
+            </a>
+            <a 
+              href="/resume.pdf" 
+              download 
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/10 hover:bg-[#D4AF37] text-white hover:text-[#050B14] border border-white/20 hover:border-[#D4AF37] font-medium transition-all duration-300"
+            >
+              <FileDown className="w-5 h-5 mr-3" />
+              Download CV
             </a>
           </div>
 
