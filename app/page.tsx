@@ -33,7 +33,7 @@ const initialProjectsData = [
     color: '59, 130, 246', // blue-500
     media: {
       type: 'image',
-      url: '/dyai.jpg'
+      url: '/dyai.svg'
     }
   },
   {
@@ -47,7 +47,7 @@ const initialProjectsData = [
     color: '168, 85, 247', // purple-500
     media: {
       type: 'image',
-      url: '/bazodiac.jpeg'
+      url: '/bazodiac.svg'
     },
     subLinks: [
       { label: 'The Idea', url: 'https://insight.bazodiac.space' },
@@ -157,10 +157,12 @@ function ProjectMedia({ project, isHovered, isExpanded }: { project: any, isHove
           </div>
         </div>
       ) : (
-        <img
+        <Image
           src={project.media.url}
           alt={project.name}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+          fill
+          sizes={isExpanded ? '(min-width: 768px) 768px, 100vw' : '100vw'}
+          className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
         />
       )}
       {/* Inner shadow overlay for depth */}
@@ -342,7 +344,7 @@ export default function Portfolio() {
         className="fixed top-0 left-0 w-[120vw] md:w-[65vw] h-[110vh] z-0 pointer-events-none"
       >
         <Image
-          src="/Portrait.jpg"
+          src="/portrait.svg"
           alt="Benjamin Poersch"
           fill
           className="object-cover object-[center_top] md:object-[left_top]"
