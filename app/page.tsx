@@ -342,7 +342,7 @@ export default function Portfolio() {
         className="fixed top-0 left-0 w-[120vw] md:w-[65vw] h-[110vh] z-0 pointer-events-none"
       >
         <Image
-          src="/Portrait.jpg"
+          src="/portrait.jpg"
           alt="Benjamin Poersch"
           fill
           className="object-cover object-[center_top] md:object-[left_top]"
