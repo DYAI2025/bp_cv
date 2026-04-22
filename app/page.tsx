@@ -33,7 +33,7 @@ const initialProjectsData = [
     color: '59, 130, 246', // blue-500
     media: {
       type: 'image',
-      url: '/dyai.svg'
+      url: '/dyai.webp'
     }
   },
   {
@@ -47,7 +47,7 @@ const initialProjectsData = [
     color: '168, 85, 247', // purple-500
     media: {
       type: 'image',
-      url: '/bazodiac.svg'
+      url: '/bazodiac.webp'
     },
     subLinks: [
       { label: 'The Idea', url: 'https://insight.bazodiac.space' },
@@ -67,7 +67,7 @@ const initialProjectsData = [
     color: '20, 184, 166', // teal-500
     media: {
       type: 'video',
-      url: '/leandeep.mp4'
+      url: '/leandeep6.mp4'
     }
   },
   {
@@ -346,7 +346,7 @@ export default function Portfolio() {
         className="fixed top-0 left-0 w-[120vw] md:w-[65vw] h-[110vh] z-0 pointer-events-none"
       >
         <Image
-          src="/portrait.png"
+          src="/ben.poersch.portrait.webp"
           alt="Benjamin Poersch"
           fill
           sizes="(min-width: 768px) 65vw, 120vw"
