@@ -346,9 +346,10 @@ export default function Portfolio() {
         className="fixed top-0 left-0 w-[120vw] md:w-[65vw] h-[110vh] z-0 pointer-events-none"
       >
         <Image
-          src="/portrait.svg"
+          src="/portrait.png"
           alt="Benjamin Poersch"
           fill
+          sizes="(min-width: 768px) 65vw, 120vw"
           className="object-cover object-[center_top] md:object-[left_top]"
           priority
         />
