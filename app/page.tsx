@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { MapPin, Mail, Github, Linkedin, ExternalLink, Terminal, Code2, Workflow, GitBranch, Cpu, LineChart, Layers, Zap, Server, Database, X, Edit2, Check, Copy, Mic, FileDown } from 'lucide-react';
+import { MapPin, Mail, Github, Linkedin, ExternalLink, Terminal, Code2, Workflow, GitBranch, Cpu, LineChart, Layers, Zap, Server, Database, X, Edit2, Check, Copy, Mic, FileDown, ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
@@ -157,10 +157,12 @@ function ProjectMedia({ project, isHovered, isExpanded }: { project: any, isHove
           </div>
         </div>
       ) : (
-        <img
+        <Image
           src={project.media.url}
           alt={project.name}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+          referrerPolicy="no-referrer"
         />
       )}
       {/* Inner shadow overlay for depth */}
@@ -281,6 +283,7 @@ export default function Portfolio() {
   const [projects, setProjects] = useState(initialProjectsData);
   const [isEditing, setIsEditing] = useState(false);
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [showEcosystem, setShowEcosystem] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const expandedCardRef = useRef<HTMLDivElement>(null);
@@ -307,6 +310,7 @@ export default function Portfolio() {
     function handleClickOutside(event: MouseEvent) {
       if (expandedCardRef.current && !expandedCardRef.current.contains(event.target as Node)) {
         setExpandedProject(null);
+        setShowEcosystem(false);
       }
     }
     
@@ -342,7 +346,7 @@ export default function Portfolio() {
         className="fixed top-0 left-0 w-[120vw] md:w-[65vw] h-[110vh] z-0 pointer-events-none"
       >
         <Image
-          src="/portrait.jpg"
+          src="/Portrait.jpg"
           alt="Benjamin Poersch"
           fill
           className="object-cover object-[center_top] md:object-[left_top]"
@@ -723,7 +727,12 @@ export default function Portfolio() {
                     if (!isExpanded) playHoverSound(index);
                   }}
                   onMouseLeave={() => setHoveredProject(null)}
-                  onClick={() => !isExpanded && setExpandedProject(project.name)}
+                  onClick={() => {
+                    if (!isExpanded) {
+                      setExpandedProject(project.name);
+                      setShowEcosystem(false);
+                    }
+                  }}
                   whileHover={!isExpanded ? { scale: 1.02, y: -4 } : {}}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`group text-left block w-full p-6 rounded-2xl bg-[#0A101D]/80 backdrop-blur-xl transition-all duration-500 overflow-hidden relative shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)]
@@ -761,7 +770,11 @@ export default function Portfolio() {
                     <motion.div layout className="flex justify-end items-start mb-4">
                       {isExpanded ? (
                         <button
-                          onClick={(e) => { e.stopPropagation(); setExpandedProject(null); }}
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            setExpandedProject(null);
+                            setShowEcosystem(false);
+                          }}
                           className="p-2 text-blue-200/50 hover:text-white hover:bg-white/10 rounded-full transition-colors"
                         >
                           <X className="w-5 h-5" />
@@ -824,6 +837,7 @@ export default function Portfolio() {
                             onClick={(e) => {
                               e.stopPropagation();
                               setExpandedProject(project.name);
+                              setShowEcosystem(false);
                             }}
                             className="text-sm ml-1 py-1.5 px-2 -mx-2 font-normal transition-colors inline-flex items-center"
                             style={{
@@ -883,6 +897,49 @@ export default function Portfolio() {
                               )}
                             </div>
 
+                            {project.subLinks && (
+                              <div className="border-t border-white/5 pt-6">
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); setShowEcosystem(!showEcosystem); }}
+                                  className="flex items-center gap-2 text-sm font-mono text-blue-200/50 uppercase tracking-wider mb-2 hover:text-[#D4AF37] transition-colors group/eco"
+                                >
+                                  Project Ecosystem
+                                  {showEcosystem ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                  <span className="text-[10px] lowercase normal-case ml-2 opacity-0 group-hover/eco:opacity-60 transition-opacity">
+                                    {showEcosystem ? '(hide details)' : '(show resources)'}
+                                  </span>
+                                </button>
+                                
+                                <AnimatePresence>
+                                  {showEcosystem && (
+                                    <motion.div 
+                                      initial={{ height: 0, opacity: 0 }}
+                                      animate={{ height: 'auto', opacity: 1 }}
+                                      exit={{ height: 0, opacity: 0 }}
+                                      className="overflow-hidden space-y-2 mt-4"
+                                    >
+                                      {project.subLinks.map((link: any, i: number) => (
+                                        <a 
+                                          key={i} 
+                                          href={link.url} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer"
+                                          onClick={(e) => e.stopPropagation()}
+                                          className="flex items-center group/link p-3 rounded-lg bg-white/5 border border-white/10 hover:border-[#D4AF37]/40 hover:bg-white/10 transition-all"
+                                        >
+                                          <div className="flex-1">
+                                            <div className="text-sm font-medium text-blue-50 group-hover/link:text-[#D4AF37] transition-colors">{link.label}</div>
+                                            <div className="text-xs text-blue-200/40 font-mono mt-0.5">{link.url.replace('https://', '')}</div>
+                                          </div>
+                                          <ExternalLink className="w-4 h-4 text-white/20 group-hover/link:text-[#D4AF37] transition-colors" />
+                                        </a>
+                                      ))}
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </div>
+                            )}
+
                             <div className="pt-4 flex flex-col sm:flex-row flex-wrap justify-end gap-3 sm:gap-4">
                               <a 
                                 href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(project.url)}&title=${encodeURIComponent(project.name)}&summary=${encodeURIComponent(project.desc)}`}
@@ -915,24 +972,6 @@ export default function Portfolio() {
                     {!isExpanded && (
                       <motion.div layout className="mt-4 text-xs font-mono text-[#D4AF37]/70 truncate">
                         {project.url.replace('https://', '')}
-                      </motion.div>
-                    )}
-                    
-                    {/* Render subLinks for Zodiac if they exist */}
-                    {project.subLinks && (
-                      <motion.div layout className="mt-4 space-y-2">
-                        {project.subLinks.map((link: any, i: number) => (
-                          <a 
-                            key={i} 
-                            href={link.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="block text-sm font-light text-blue-200/60 hover:text-[#D4AF37] transition-colors border-l-2 border-white/10 hover:border-[#D4AF37] pl-3 py-1"
-                          >
-                            <span className="text-white/80 font-normal">{link.label}:</span> {link.url.replace('https://', '')}
-                          </a>
-                        ))}
                       </motion.div>
                     )}
                   </div>
@@ -990,11 +1029,35 @@ export default function Portfolio() {
               <Cpu className="w-6 h-6 mr-3 text-[#D4AF37]" />
               <h3 className="text-2xl font-serif font-light text-blue-50">AI & Integration</h3>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {['LLM-Pipelines', 'Semantic Marker Framework', 'AI-Workflows', 'Prompt Engineering', 'Product Building', 'API Integration', 'Rapid Prototyping', 'Next.js', 'React', 'Agent Networks', 'Agent Architecture', 'Markdown', 'LLM Training', 'Fine-Tuning'].map(skill => (
-                <span key={skill} className="px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-xs font-light tracking-wide">
-                  {skill}
-                </span>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { name: 'LLM-Pipelines', level: 95 },
+                { name: 'Semantic Marker Framework', level: 90 },
+                { name: 'AI-Workflows', level: 95 },
+                { name: 'Prompt Engineering', level: 100 },
+                { name: 'Product Building', level: 85 },
+                { name: 'API Integration', level: 90 },
+                { name: 'Rapid Prototyping', level: 95 },
+                { name: 'Next.js', level: 80 },
+                { name: 'React', level: 85 },
+                { name: 'Agent Networks', level: 90 },
+                { name: 'Agent Architecture', level: 90 },
+                { name: 'Markdown', level: 100 },
+                { name: 'LLM Training', level: 75 },
+                { name: 'Fine-Tuning', level: 70 }
+              ].map(skill => (
+                <motion.span 
+                  key={skill.name}
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: 'rgba(212, 175, 55, 0.15)',
+                    boxShadow: '0 0 20px rgba(212, 175, 55, 0.2)',
+                    borderColor: 'rgba(212, 175, 55, 0.4)'
+                  }}
+                  className="px-4 py-2 rounded-xl bg-[#D4AF37]/5 border border-[#D4AF37]/10 text-[#D4AF37] text-sm font-light tracking-wide cursor-default transition-all duration-300"
+                >
+                  {skill.name}
+                </motion.span>
               ))}
             </div>
           </div>
@@ -1004,11 +1067,34 @@ export default function Portfolio() {
               <Layers className="w-6 h-6 mr-3 text-blue-200" />
               <h3 className="text-2xl font-serif font-light text-blue-50">Agile Foundation</h3>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {['Agile Transformation', 'Scrum & Kanban', 'Leadership Advisory', 'Organizational Change', 'Team Development', 'Process Execution', 'Facilitation', 'Strategic Guidance'].map(skill => (
-                <span key={skill} className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-200 text-xs font-light tracking-wide">
-                  {skill}
-                </span>
+            <div className="space-y-4">
+              {[
+                { name: 'Agile Transformation', level: 95 },
+                { name: 'Scrum & Kanban', level: 100 },
+                { name: 'Leadership Advisory', level: 90 },
+                { name: 'Organizational Change', level: 85 },
+                { name: 'Team Development', level: 95 },
+                { name: 'Process Execution', level: 90 },
+                { name: 'Facilitation', level: 95 },
+                { name: 'Strategic Guidance', level: 85 }
+              ].map(skill => (
+                <div key={skill.name} className="space-y-2">
+                  <div className="flex justify-between items-center text-xs font-mono text-blue-200/50 uppercase tracking-wider">
+                    <span>{skill.name}</span>
+                    <span className="text-blue-200/30">{skill.level}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-blue-500/5 rounded-full overflow-hidden border border-white/5">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                      className="h-full bg-gradient-to-r from-blue-500/40 to-blue-400/60 rounded-full relative"
+                    >
+                      <div className="absolute inset-0 bg-blue-400/20 blur-sm" />
+                    </motion.div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
