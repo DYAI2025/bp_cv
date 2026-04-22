@@ -62,14 +62,14 @@ export const projectsData = [
     }
   },
   {
-    name: 'Promptschmiede',
-    url: 'https://prompt.machinetool.site/',
-    desc: 'AI designed advanced prompting. Every prompt is refined to stand out.',
-    fullDesc: 'Every prompt is detailed and refined. A workspace for crafting, testing, and managing complex prompts for various LLMs.',
-    tech: ['Prompt Engineering', 'Next.js', 'OpenAI API'],
+    name: 'VSA Agent Agency',
+    url: 'https://vsa-production.up.railway.app',
+    desc: 'Eine 100% Agent-Agency — autonome AI-Agenten liefern Dienstleistungen schnell, professionell, überraschend günstig.',
+    fullDesc: 'Eine 100%ige Agent-Agency, in der autonome AI-Agenten Dienstleistungen in höchster professioneller Qualität anbieten — schnell geliefert, zu erstaunlich guten Preisen.',
+    tech: ['Autonomous Agents', 'Multi-Agent Systems', 'LLMs', 'Agent SDKs'],
     highlight: false,
-    icon: 'Terminal',
-    color: '245, 158, 11',
+    icon: 'Workflow',
+    color: '16, 185, 129',
     media: {
       type: 'video',
       url: '/prompt.forge.mp4'

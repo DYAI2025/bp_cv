@@ -1,12 +1,12 @@
 'use client';
 
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Linkedin, ChevronDown, ChevronUp, Cpu, Server, LineChart, Layers, Terminal, Mic } from 'lucide-react';
+import { X, ExternalLink, Linkedin, ChevronDown, ChevronUp, Cpu, Server, LineChart, Layers, Terminal, Mic, Workflow } from 'lucide-react';
 import { ProjectMedia } from './ProjectMedia';
 import { playHoverSound } from '@/lib/audio';
 
 const iconMap: Record<string, any> = {
-  Cpu, Server, LineChart, Layers, Terminal, Mic
+  Cpu, Server, LineChart, Layers, Terminal, Mic, Workflow
 };
 
 interface ProjectCardProps {
