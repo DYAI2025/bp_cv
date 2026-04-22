@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Mic } from 'lucide-react';
 import Image from 'next/image';
@@ -14,6 +14,8 @@ interface ProjectMediaProps {
 
 export function ProjectMedia({ project, isHovered, isExpanded }: ProjectMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const [isCalling, setIsCalling] = useState(false);
 
   useEffect(() => {
     if (project.media?.type === 'video' && videoRef.current) {
@@ -47,15 +49,31 @@ export function ProjectMedia({ project, isHovered, isExpanded }: ProjectMediaPro
         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#050B14] to-[#0A101D] relative">
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37] via-transparent to-transparent animate-pulse pointer-events-none" />
           <div className="relative z-50 flex flex-col items-center">
-            <Mic className="w-12 h-12 text-[#D4AF37] mb-4 opacity-80" />
-            <p className="text-sm font-light text-blue-200/60 text-center px-4">
-              Click the widget below to start a conversation.
-            </p>
-            <div className="mt-4" onClick={(e) => e.stopPropagation()}>
-              {/* @ts-ignore */}
-              <elevenlabs-convai agent-id={project.media.agentId}></elevenlabs-convai>
-              <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="lazyOnload" />
-            </div>
+            {!isCalling ? (
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsCalling(true);
+                }}
+                className="flex flex-col items-center group/call"
+              >
+                <div className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center mb-4 group-hover/call:bg-[#D4AF37]/20 group-hover/call:border-[#D4AF37]/50 transition-all duration-300">
+                  <Mic className="w-8 h-8 text-[#D4AF37] opacity-80" />
+                </div>
+                <span className="text-sm font-medium text-blue-200/80 uppercase tracking-widest group-hover/call:text-[#D4AF37] transition-colors">Start Call</span>
+              </button>
+            ) : (
+              <>
+                <p className="text-sm font-light text-blue-200/60 text-center px-4 mb-4">
+                  Conversation active. Click widget to interact.
+                </p>
+                <div onClick={(e) => e.stopPropagation()}>
+                  {/* @ts-ignore */}
+                  <elevenlabs-convai agent-id={project.media.agentId}></elevenlabs-convai>
+                  <Script src="https://unpkg.com/@elevenlabs/convai-widget-embed" strategy="lazyOnload" />
+                </div>
+              </>
+            )}
           </div>
         </div>
       ) : (
