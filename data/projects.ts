@@ -64,7 +64,7 @@ export const projectsData = [
   },
   {
     name: 'Augmented Ops',
-    url: 'https://vsa-production.up.railway.app',
+    url: 'https://augmentedopsinc-production.up.railway.app',
     desc: 'Eine 100% Agent-Agency — autonome AI-Agenten liefern Dienstleistungen schnell, professionell, überraschend günstig.',
     fullDesc: 'Eine 100%ige Agent-Agency, in der autonome AI-Agenten Dienstleistungen in höchster professioneller Qualität anbieten — schnell geliefert, zu erstaunlich guten Preisen.',
     tech: ['Autonomous Agents', 'Multi-Agent Systems', 'LLMs', 'Agent SDKs'],
@@ -74,7 +74,11 @@ export const projectsData = [
     media: {
       type: 'video',
       url: '/augmented-ops.mp4'
-    }
+    },
+    subLinks: [
+      { label: 'Live Site', url: 'https://augmentedopsinc-production.up.railway.app' },
+      { label: 'Source (GitHub)', url: 'https://github.com/DYAI2025/Augmented_ops.INC' }
+    ]
   },
   {
     name: 'Ben B18 Quantified',
