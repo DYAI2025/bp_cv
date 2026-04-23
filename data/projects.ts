@@ -62,7 +62,7 @@ export const projectsData = [
     }
   },
   {
-    name: 'VSA Agent Agency',
+    name: 'Augmented Ops',
     url: 'https://vsa-production.up.railway.app',
     desc: 'Eine 100% Agent-Agency — autonome AI-Agenten liefern Dienstleistungen schnell, professionell, überraschend günstig.',
     fullDesc: 'Eine 100%ige Agent-Agency, in der autonome AI-Agenten Dienstleistungen in höchster professioneller Qualität anbieten — schnell geliefert, zu erstaunlich guten Preisen.',
@@ -72,7 +72,7 @@ export const projectsData = [
     color: '16, 185, 129',
     media: {
       type: 'video',
-      url: '/prompt.forge.mp4'
+      url: '/augmented-ops.mp4'
     }
   },
   {
