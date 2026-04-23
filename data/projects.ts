@@ -45,7 +45,8 @@ export const projectsData = [
     color: '20, 184, 166',
     media: {
       type: 'video',
-      url: '/leandeep6.mp4'
+      url: '/leandeep6.mp4',
+      poster: '/leandeep-poster.png'
     }
   },
   {
@@ -59,7 +60,8 @@ export const projectsData = [
     color: '244, 63, 94',
     media: {
       type: 'video',
-      url: 'https://media.dyai.cloud/uploads/2026/03/7a6d07a3-98f1-41b9-b5c2-68168467368f.mp4'
+      url: 'https://media.dyai.cloud/uploads/2026/03/7a6d07a3-98f1-41b9-b5c2-68168467368f.mp4',
+      poster: '/coupletimer-poster.png'
     }
   },
   {
@@ -73,7 +75,8 @@ export const projectsData = [
     color: '16, 185, 129',
     media: {
       type: 'video',
-      url: '/augmented-ops.mp4'
+      url: '/augmented-ops.mp4',
+      poster: '/augmentedOps.png'
     },
     subLinks: [
       { label: 'Live Site', url: 'https://augmentedopsinc-production.up.railway.app' },
