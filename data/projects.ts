@@ -87,7 +87,8 @@ export const projectsData = [
     color: '212, 175, 55',
     media: {
       type: 'elevenlabs',
-      agentId: 'agent_6201kndfxgmwf8gbx5zfbhtsmstc'
+      agentId: 'agent_6201kndfxgmwf8gbx5zfbhtsmstc',
+      hoverVideo: '/ben.p.holo.mp4'
     }
   }
 ];

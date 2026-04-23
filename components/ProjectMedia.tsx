@@ -18,7 +18,9 @@ export function ProjectMedia({ project, isHovered, isExpanded }: ProjectMediaPro
   const [isCalling, setIsCalling] = useState(false);
 
   useEffect(() => {
-    if (project.media?.type === 'video' && videoRef.current) {
+    // Also drives the optional background video for the elevenlabs tile variant.
+    const hasPlayableVideo = project.media?.type === 'video' || project.media?.hoverVideo;
+    if (hasPlayableVideo && videoRef.current) {
       if (isHovered) {
         videoRef.current.play().catch(() => {});
       } else {
@@ -46,8 +48,20 @@ export function ProjectMedia({ project, isHovered, isExpanded }: ProjectMediaPro
           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
         />
       ) : project.media.type === 'elevenlabs' ? (
-        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#050B14] to-[#0A101D] relative">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37] via-transparent to-transparent animate-pulse pointer-events-none" />
+        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#050B14] to-[#0A101D] relative overflow-hidden rounded-xl">
+          {project.media.hoverVideo && (
+            <video
+              ref={videoRef}
+              src={project.media.hoverVideo}
+              poster={project.media.poster}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
+            />
+          )}
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#D4AF37] via-transparent to-transparent animate-pulse pointer-events-none" />
           <div className="relative z-50 flex flex-col items-center">
             {!isCalling ? (
               <button 
