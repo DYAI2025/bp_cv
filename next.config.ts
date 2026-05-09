@@ -17,13 +17,13 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**', // This allows any path under the hostname
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
-    // Local project artwork in /public is SVG (portrait.svg, dyai.svg, bazodiac.svg).
-    // Next.js blocks SVG through the image optimizer unless explicitly allowed;
-    // the CSP neutralizes any script/foreignObject payload inside an SVG.
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'inline',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   output: 'standalone',
   transpilePackages: ['motion'],
